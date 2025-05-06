@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Motivation - Challenges</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .challenges-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .challenge-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .challenge-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .card-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .btn {
+            display: block;
+            padding: 15px 20px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .beginner {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+        }
+        
+        .intermediate {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+        }
+        
+        .advanced {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .popular {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #f1c40f;
+            color: #34495e;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transform: translateX(30%) translateY(0) rotate(45deg);
+            transform-origin: top left;
+        }
+        
+        .days-counter {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 5px 15px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 1100px) {
+            .challenges-container {
+                gap: 20px;
+            }
+            
+            .challenge-card {
+                width: 320px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .challenges-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .challenge-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Challenge Yourself</h1>
+            <p>Choose a challenge that fits your goals and commitment level. Each plan is designed to build consistent habits and transform your life one day at a time.</p>
+        </div>
+        
+        <div class="challenges-container">
+            <!-- 30 Day Challenge -->
+            <div class="challenge-card">
+                <div class="card-header beginner">
+                    <div class="days-counter">30 DAYS</div>
+                    <h2>Beginner's Journey</h2>
+                    <p>Perfect for those starting their motivation journey</p>
+                </div>
+                <div class="card-body">
+                    <ul class="features">
+                        <li>Daily motivation quotes</li>
+                        <li>Simple 15-minute daily tasks</li>
+                        <li>Weekly reflection prompts</li>
+                        <li>Progress tracking</li>
+                        <li>Community support</li>
+                    </ul>
+                    <a href="#" class="btn">Start 30-Day Challenge</a>
+                </div>
+            </div>
+            
+            <!-- 60 Day Challenge -->
+            <div class="challenge-card">
+                <div class="card-header intermediate">
+                    <div class="days-counter">60 DAYS</div>
+                    <h2>Habit Builder</h2>
+                    <p>For those ready to commit to lasting change</p>
+                    <div class="popular">POPULAR</div>
+                </div>
+                <div class="card-body">
+                    <ul class="features">
+                        <li>All Beginner features</li>
+                        <li>Personalized goal setting</li>
+                        <li>30-minute daily challenges</li>
+                        <li>Accountability partner matching</li>
+                        <li>Bi-weekly coaching sessions</li>
+                    </ul>
+                    <a href="#" class="btn">Start 60-Day Challenge</a>
+                </div>
+            </div>
+            
+            <!-- 90 Day Challenge -->
+            <div class="challenge-card">
+                <div class="card-header advanced">
+                    <div class="days-counter">90 DAYS</div>
+                    <h2>Life Transformer</h2>
+                    <p>For those committed to complete transformation</p>
+                </div>
+                <div class="card-body">
+                    <ul class="features">
+                        <li>All Habit Builder features</li>
+                        <li>Custom morning & evening routines</li>
+                        <li>Advanced habit stacking techniques</li>
+                        <li>Deep work focus training</li>
+                        <li>Milestone rewards & celebrations</li>
+                    </ul>
+                    <a href="#" class="btn">Start 90-Day Challenge</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

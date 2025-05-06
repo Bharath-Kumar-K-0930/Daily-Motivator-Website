@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>ADMIN LOGIN</title>
+</head>
+
+<body>
+    <div class="wrapper">
+<form action="/admin-login" method="POST">
+    <h1>ADMIN LOGIN</h1>
+    <div class="input-box">
+        <input type="text" name="username" id="username" placeholder="Username" autocomplete="username" required>
+        <i class='bx bxs-user'></i>
+    </div>
+    <div class="input-box">
+        <input type="password" name="Password" id="Password" placeholder="Password" required>
+        <i class='bx bxs-lock-alt'></i>
+    </div>
+    <div class="remember-forgot">
+        <label><input type="checkbox" id="remember-me"> Remember Me</label>
+        <a href="#">Forgot Password?</a>
+    </div>
+    <button type="submit" class="btn">LOGIN</button>
+    <div class="register-link">
+        <p >
+            For User 
+            Click here to <a href="loginpage.html" style="color: rgb(9, 190, 79);">Login</a>
+        </p>
+    </div>
+</form>
+
+    </div>
+</body>
+
+</html>

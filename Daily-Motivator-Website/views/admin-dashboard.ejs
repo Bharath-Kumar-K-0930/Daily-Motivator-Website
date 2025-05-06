@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #34495e;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        label {
+            flex: 1 1 150px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input[type="text"], textarea {
+            flex: 2 1 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .entity-list {
+            margin-top: 15px;
+        }
+        .entity-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .entity-item:last-child {
+            border-bottom: none;
+        }
+        .entity-actions button {
+            margin-left: 10px;
+            background-color: #e74c3c;
+        }
+        .entity-actions button.edit {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <main>
+        <section id="user-access">
+            <h2>Manage User Access</h2>
+            <p>Feature to manage user access will be implemented here.</p>
+        </section>
+
+        <section id="quotes">
+            <h2>Quotes</h2>
+            <form id="add-quote-form" method="POST" action="/admin/quotes/add">
+                <label for="quote-text">Quote Text:</label>
+                <textarea id="quote-text" name="text" required></textarea>
+                <button type="submit">Add Quote</button>
+            </form>
+            <div class="entity-list" id="quotes-list">
+                <% quotes.forEach(function(quote) { %>
+                <div class="entity-item">
+                    <span><%= quote.text %></span>
+                    <div class="entity-actions">
+                        <button class="edit" data-id="<%= quote._id %>">Edit</button>
+                        <button class="delete" data-id="<%= quote._id %>">Delete</button>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </section>
+
+        <section id="challenges">
+            <h2>Challenges</h2>
+            <form id="add-challenge-form" method="POST" action="/admin/challenges/add">
+                <label for="challenge-title">Title:</label>
+                <input type="text" id="challenge-title" name="title" required />
+                <label for="challenge-description">Description:</label>
+                <textarea id="challenge-description" name="description" required></textarea>
+                <label for="challenge-duration">Duration (days):</label>
+                <input type="text" id="challenge-duration" name="duration" required />
+                <label for="challenge-levelClass">Level Class (beginner/intermediate/advanced):</label>
+                <input type="text" id="challenge-levelClass" name="levelClass" required />
+                <label for="challenge-popular">Popular (true/false):</label>
+                <input type="text" id="challenge-popular" name="popular" required />
+                <label for="challenge-features">Features (comma separated):</label>
+                <input type="text" id="challenge-features" name="features" required />
+                <button type="submit">Add Challenge</button>
+            </form>
+            <div class="entity-list" id="challenges-list">
+                <% challenges.forEach(function(challenge) { %>
+                <div class="entity-item">
+                    <span><%= challenge.title %> (<%= challenge.duration %> days)</span>
+                    <div class="entity-actions">
+                        <button class="edit" data-id="<%= challenge._id %>">Edit</button>
+                        <button class="delete" data-id="<%= challenge._id %>">Delete</button>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </section>
+
+        <section id="rewards">
+            <h2>Rewards</h2>
+            <form id="add-reward-form" method="POST" action="/admin/rewards/add">
+                <label for="reward-title">Title:</label>
+                <input type="text" id="reward-title" name="title" required />
+                <label for="reward-description">Description:</label>
+                <textarea id="reward-description" name="description" required></textarea>
+                <button type="submit">Add Reward</button>
+            </form>
+            <div class="entity-list" id="rewards-list">
+                <% rewards.forEach(function(reward) { %>
+                <div class="entity-item">
+                    <span><%= reward.title %></span>
+                    <div class="entity-actions">
+                        <button class="edit" data-id="<%= reward._id %>">Edit</button>
+                        <button class="delete" data-id="<%= reward._id %>">Delete</button>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </section>
+
+        <section id="homepage-content">
+            <h2>Homepage Content</h2>
+            <p>Feature to manage homepage content will be implemented here.</p>
+        </section>
+    </main>
+</body>
+</html>

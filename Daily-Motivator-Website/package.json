@@ -1,0 +1,18 @@
+{
+    "name": "login-system",
+    "version": "1.0.0",
+    "description": "Simple login system for users and admins using Node.js and Express",
+    "main": "server.js",
+    "scripts": {
+        "start": "nodemon server.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.20.3",
+        "dotenv": "^16.5.0",
+        "ejs": "^3.1.10",
+        "express": "^4.21.2",
+        "express-session": "^1.18.1",
+        "mongoose": "^7.3.1",
+        "nodemon": "^3.1.10"
+    }
+}

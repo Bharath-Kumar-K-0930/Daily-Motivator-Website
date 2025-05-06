@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Motivation - Challenges</title>
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --primary-dark: #2667cc;
+            --secondary: #ff006e;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+            --gray: #8d99ae;
+            --success: #38b000;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            line-height: 1.8;
+        }
+
+        .login-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(58, 134, 255, 0.4);
+        }
+        
+        /* Filters */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            color: var(--dark);
+            border: 2px solid var(--primary);
+            padding: 10px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .filter-btn:hover {
+            background-color: rgba(58, 134, 255, 0.1);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Challenge Cards */
+        .challenges-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .challenge-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .challenge-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .card-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            color: var(--dark);
+        }
+        
+        .features li:before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .btn {
+            display: block;
+            padding: 14px;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(58, 134, 255, 0.4);
+        }
+        
+        /* Card variants */
+        .beginner {
+            border-top: 4px solid #3a86ff;
+        }
+        
+        .intermediate {
+            border-top: 4px solid #8338ec;
+        }
+        
+        .advanced {
+            border-top: 4px solid #ff006e;
+        }
+        
+        .popular {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+        }
+        
+        .days-counter {
+            display: inline-block;
+            background-color: rgba(58, 134, 255, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            padding: 5px 15px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 80px;
+        }
+
+        footer .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        footer .footer-section {
+            flex: 1 1 250px;
+        }
+
+        footer h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        footer h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        footer p, footer a {
+            color: #d1d5db;
+            font-size: 0.95rem;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .social-icons svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        /* Back to top button */
+        #backToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            width: 50px;
+            height: 50px;
+            border: none;
+            outline: none;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        #backToTopBtn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Copyright */
+        .copyright {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .login-btn {
+                position: static;
+                display: inline-block;
+                margin-top: 20px;
+            }
+            
+            .filter-container {
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                flex: 1 1 40%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            
+            .challenges-container {
+                grid-template-columns: 1fr;
+            }
+            
+            footer .footer-section {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Challenge Yourself</h1>
+            <p>Transform your habits and life one day at a time with our structured challenges</p>
+            <a href="/loginpage.html" class="login-btn">Login</a>
+        </div>
+
+        <div class="filter-container" role="group" aria-label="Challenge duration filter">
+            <button class="filter-btn active" data-filter="all" aria-pressed="true">All Challenges</button>
+            <button class="filter-btn" data-filter="30" aria-pressed="false">30 Days</button>
+            <button class="filter-btn" data-filter="60" aria-pressed="false">60 Days</button>
+            <button class="filter-btn" data-filter="90" aria-pressed="false">90 Days</button>
+        </div>
+        
+        <div class="challenges-container" id="challengesContainer">
+            <!-- Challenge Card 1 -->
+            <div class="challenge-card" data-duration="30">
+                <div class="card-header beginner">
+                    <div class="days-counter">30 DAYS</div>
+                    <h2>Morning Routine</h2>
+                    <p>Start your day right</p>
+                </div>
+                <div class="card-body">
+                    <ul class="features">
+                        <li>Daily guided meditations</li>
+                        <li>Mindful planning techniques</li>
+                        <li>Progress tracking tools</li>
+                        <li>Community support</li>
+                    </ul>
+                    <a href="/loginpage.html" class="btn">Start Challenge</a>
+                </div>
+            </div>
+            
+            <!-- Challenge Card 2 -->
+            <div class="challenge-card" data-duration="60">
+                <div class="card-header intermediate">
+                    <div class="days-counter">60 DAYS</div>
+                    <h2>Fitness Transformation</h2>
+                    <p>Build your dream body</p>
+                    <div class="popular">POPULAR</div>
+                </div>
+                <div class="card-body">
+                    <ul class="features">
+                        <li>Customized workout plans</li>
+                        <li>Nutrition guidelines</li>
+                        <li>Video demonstrations</li>
+                        <li>Weekly check-ins</li>
+                    </ul>
+                    <a href="/loginpage.html" class="btn">Start Challenge</a>
+                </div>
+            </div>
+            
+            <!-- Challenge Card 3 -->
+            <div class="challenge-card" data-duration="90">
+                <div class="card-header advanced">
+                    <div class="days-counter">90 DAYS</div>
+                    <h2>Mindfulness Mastery</h2>
+                    <p>Transform your mental clarity</p>
+                </div>
+                <div class="card-body">
+                    <ul class="features">
+                        <li>Advanced meditation techniques</li>
+                        <li>Stress management tools</li>
+                        <li>Sleep improvement strategies</li>
+                        <li>Expert guidance</li>
+                    </ul>
+                    <a href="/loginpage.html" class="btn">Start Challenge</a>
+                </div>
+            </div>
+            
+            <!-- Challenge Card 4 -->
+            <div class="challenge-card" data-duration="30">
+                <div class="card-header beginner">
+                    <div class="days-counter">30 DAYS</div>
+                    <h2>Digital Detox</h2>
+                    <p>Reclaim your focus</p>
+                </div>
+                <div class="card-body">
+                    <ul class="features">
+                        <li>Screen time monitoring</li>
+                        <li>Alternative activity suggestions</li>
+                        <li>Daily reflection prompts</li>
+                        <li>Weekly achievements</li>
+                    </ul>
+                    <a href="/loginpage.html" class="btn">Start Challenge</a>
+                </div>
+            </div>
+            
+            <!-- Challenge Card 5 -->
+            <div class="challenge-card" data-duration="60">
+                <div class="card-header intermediate">
+                    <div class="days-counter">60 DAYS</div>
+                    <h2>Creative Writing</h2>
+                    <p>Unleash your creativity</p>
+                </div>
+                <div class="card-body">
+                    <ul class="features">
+                        <li>Daily writing prompts</li>
+                        <li>Storytelling techniques</li>
+                        <li>Peer feedback system</li>
+                        <li>Publishing opportunities</li>
+                    </ul>
+                    <a href="/loginpage.html" class="btn">Start Challenge</a>
+                </div>
+            </div>
+            
+            <!-- Challenge Card 6 -->
+            <div class="challenge-card" data-duration="90">
+                <div class="card-header advanced">
+                    <div class="days-counter">90 DAYS</div>
+                    <h2>Financial Freedom</h2>
+                    <p>Master your money</p>
+                    <div class="popular">POPULAR</div>
+                </div>
+                <div class="card-body">
+                    <ul class="features">
+                        <li>Budget creation tools</li>
+                        <li>Investment strategies</li>
+                        <li>Debt reduction planning</li>
+                        <li>Wealth-building mindset</li>
+                    </ul>
+                    <a href="/loginpage.html" class="btn">Start Challenge</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Daily Motivation helps you build positive habits through engaging challenges designed to transform your life one day at a time.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="/about.html">About</a>
+                <a href="/faq.html">FAQ</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/privacy.html">Privacy Policy</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@dailymotivation.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.675 0h-21.35C.6 0 0 .6 0 1.325v21.351C0 23.4.6 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.312h3.59l-.467 3.622h-3.123V24h6.116C23.4 24 24 23.4 24 22.675V1.325C24 .6 23.4 0 22.675 0z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 4.557a9.83 9.83 0 01-2.828.775 4.932 4.932 0 002.165-2.724 9.865 9.865 0 01-3.127 1.195 4.916 4.916 0 00-8.38 4.482A13.94 13.94 0 011.671 3.149a4.916 4.916 0 001.523 6.574 4.897 4.897 0 01-2.228-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.935 4.935 0 01-2.224.084 4.918 4.918 0 004.588 3.417A9.867 9.867 0 010 19.54a13.94 13.94 0 007.548 2.209c9.056 0 14.01-7.506 14.01-14.01 0-.213-.005-.425-.014-.636A10.012 10.012 0 0024 4.557z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Daily Motivation. All rights reserved.
+        </div>
+    </footer>
+
+    <button id="backToTopBtn" title="Back to top">↑</button>
+
+    <script>
+        // Filter challenges by duration
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const challengesContainer = document.getElementById('challengesContainer');
+        const challengeCards = challengesContainer.querySelectorAll('.challenge-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-pressed', 'false');
+                });
+                button.classList.add('active');
+                button.setAttribute('aria-pressed', 'true');
+                const filter = button.getAttribute('data-filter');
+
+                challengeCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-duration') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        };
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+    </script>
+</body>
+</html>
